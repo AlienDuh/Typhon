@@ -1,0 +1,359 @@
+#include <iostream>
+using namespace std;
+#include <windows.h>
+#include <conio.h>
+#include <cstdlib>
+#include <vector>
+#include <thread>
+#include <stdlib.h>
+#include <winuser.h>
+#include <string>
+#include <algorithm>
+string TypeT;
+vector<BYTE> Keys = { 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A, 0x4B, 0x4C, 0x4D, 0x4E, 0x4F, 0x50, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5A };
+vector<BYTE> Nums = { 0x31,0x32,0x33,0x34,0x35,0x36,0x37,0x38,0x39,0x30 };
+const int MAX = 100;
+void Press(BYTE Key, float KeyPressTime, float AfterPressTime, int leeway, bool cap) {
+	if (cap == true) {
+		keybd_event(VK_CAPITAL, 0, KEYEVENTF_EXTENDEDKEY, 0);
+		sleep(leeway);
+		keybd_event(VK_CAPITAL, 0, KEYEVENTF_KEYUP, 0);
+	}
+
+	keybd_event(Key, 0, KEYEVENTF_EXTENDEDKEY, 0);
+	int rand1 = rand() % 2 + 1;
+	if (rand1 == 1) {
+		sleep(KeyPressTime + rand() % (leeway));
+	}
+	else if (rand1 == 2) {
+		sleep(KeyPressTime - rand() % (leeway));
+	}
+	
+	keybd_event(Key, 0, KEYEVENTF_KEYUP, 0);
+	
+	int rand2 = rand() % 2 + 1;
+	if (rand2 == 1) {
+		sleep(AfterPressTime + rand() % (leeway));
+	} else if (rand2 == 2) {
+		sleep(AfterPressTime - rand() % (leeway));
+	}
+	if (cap == true) {
+		keybd_event(VK_CAPITAL, 0, KEYEVENTF_EXTENDEDKEY, 0);
+		sleep(leeway);
+		keybd_event(VK_CAPITAL, 0, KEYEVENTF_KEYUP, 0);
+	}
+	
+}
+void Space(float KeyPressTime, float AfterPressTime, int leeway) {
+	keybd_event(VK_SPACE, 0, KEYEVENTF_EXTENDEDKEY, 0);
+	int rand1 = rand() % 2 + 1;
+	if (rand1 == 1) {
+		sleep(KeyPressTime + rand() % (leeway));
+	}
+	else if (rand1 == 2) {
+		sleep(KeyPressTime - rand() % (leeway));
+	}
+
+	keybd_event(VK_SPACE, 0, KEYEVENTF_KEYUP, 0);
+
+	int rand2 = rand() % 2 + 1;
+	if (rand2 == 1) {
+		sleep(AfterPressTime + rand() % (leeway));
+	}
+	else if (rand2 == 2) {
+		sleep(AfterPressTime - rand() % (leeway));
+	}
+}
+void Enter(float KeyPressTime, float AfterPressTime, int leeway) {
+	keybd_event(VK_RETURN, 0, KEYEVENTF_EXTENDEDKEY, 0);
+	int rand1 = rand() % 2 + 1;
+	if (rand1 == 1) {
+		sleep(KeyPressTime + rand() % (leeway));
+	}
+	else if (rand1 == 2) {
+		sleep(KeyPressTime - rand() % (leeway));
+	}
+
+	keybd_event(VK_RETURN, 0, KEYEVENTF_KEYUP, 0);
+
+	int rand2 = rand() % 2 + 1;
+	if (rand2 == 1) {
+		sleep(AfterPressTime + rand() % (leeway));
+	}
+	else if (rand2 == 2) {
+		sleep(AfterPressTime - rand() % (leeway));
+	}
+}
+void CharDetector(string TypeT, vector<BYTE> Keys, vector<BYTE> Nums, float KeyPressTime, float AfterPressTime, int leeway) {
+	vector<char> TypeChars(TypeT.begin(), TypeT.end());
+
+	for (int i = 0; i < TypeChars.size(); i++) {
+		switch (TypeChars[i]) {
+		case 'a':
+			Press(Keys[0], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'b':
+			Press(Keys[1], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'c':
+			Press(Keys[2], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'd':
+			Press(Keys[3], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'e':
+			Press(Keys[4], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'f':
+			Press(Keys[5], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'g':
+			Press(Keys[6], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'h':
+			Press(Keys[7], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'i':
+			Press(Keys[8], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'j':
+			Press(Keys[9], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'k':
+			Press(Keys[10], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'l':
+			Press(Keys[11], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'm':
+			Press(Keys[12], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'n':
+			Press(Keys[13], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'o':
+			Press(Keys[14], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'p':
+			Press(Keys[15], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'q':
+			Press(Keys[16], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'r':
+			Press(Keys[17], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 's':
+			Press(Keys[18], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 't':
+			Press(Keys[19], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'u':
+			Press(Keys[20], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'v':
+			Press(Keys[21], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'w':
+			Press(Keys[22], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'x':
+			Press(Keys[23], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'y':
+			Press(Keys[24], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case 'z':
+			Press(Keys[25], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case ' ':
+			Space(KeyPressTime, AfterPressTime, leeway);
+			break;
+		case 'A':
+			Press(Keys[0], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'B':
+			Press(Keys[1], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'C':
+			Press(Keys[2], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'D':
+			Press(Keys[3], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'E':
+			Press(Keys[4], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'F':
+			Press(Keys[5], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'G':
+			Press(Keys[6], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'H':
+			Press(Keys[7], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'I':
+			Press(Keys[8], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'J':
+			Press(Keys[9], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'K':
+			Press(Keys[10], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'L':
+			Press(Keys[11], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'M':
+			Press(Keys[12], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'N':
+			Press(Keys[13], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'O':
+			Press(Keys[14], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'P':
+			Press(Keys[15], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'Q':
+			Press(Keys[16], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'R':
+			Press(Keys[17], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'S':
+			Press(Keys[18], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'T':
+			Press(Keys[19], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'U':
+			Press(Keys[20], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'V':
+			Press(Keys[21], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'W':
+			Press(Keys[22], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'X':
+			Press(Keys[23], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'Y':
+			Press(Keys[24], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case 'Z':
+			Press(Keys[25], KeyPressTime, AfterPressTime, leeway, true);
+			break;
+		case '1':
+			Press(Nums[0], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case '2':
+			Press(Nums[1], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case '3':
+			Press(Nums[2], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case '4':
+			Press(Nums[3], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case '5':
+			Press(Nums[4], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case '6':
+			Press(Nums[5], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case '7':
+			Press(Nums[6], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case '8':
+			Press(Nums[7], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case '9':
+			Press(Nums[8], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		case '0':
+			Press(Nums[9], KeyPressTime, AfterPressTime, leeway, false);
+			break;
+		}
+	}
+}
+void Click(float clickTime) {
+    mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+	sleep(clickTime);
+	mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+	sleep(clickTime);
+}
+void Delete(float KeyPressTime, float AfterPressTime, int leeway) {
+	keybd_event(VK_LCONTROL, 0, KEYEVENTF_EXTENDEDKEY, 0);
+	int rand1 = rand() % 2 + 1;
+	if (rand1 == 1) {
+		sleep(KeyPressTime + rand() % (leeway));
+	}
+	else if (rand1 == 2) {
+		sleep(KeyPressTime - rand() % (leeway));
+	}
+
+	keybd_event(VK_BACK, 0, KEYEVENTF_EXTENDEDKEY, 0);
+	int rand2 = rand() % 2 + 1;
+	if (rand2 == 1) {
+		sleep(KeyPressTime + rand() % (leeway));
+	}
+	else if (rand2 == 2) {
+		sleep(KeyPressTime - rand() % (leeway));
+	}
+
+	keybd_event(VK_LCONTROL, 0, KEYEVENTF_KEYUP, 0);
+	int rand3 = rand() % 2 + 1;
+	if (rand3 == 1) {
+		sleep(AfterPressTime + rand() % (leeway));
+	}
+	else if (rand3 == 2) {
+		sleep(AfterPressTime - rand() % (leeway));
+	}
+
+	keybd_event(VK_BACK, 0, KEYEVENTF_KEYUP, 0);
+	int rand4 = rand() % 2 + 1;
+	if (rand4 == 1) {
+		sleep(AfterPressTime + rand() % (leeway));
+	}
+	else if (rand4 == 2) {
+		sleep(AfterPressTime - rand() % (leeway));
+	}
+}
+string printRandomString(int n)
+{
+	char alphabet[MAX] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g',
+						  'h', 'i', 'j', 'k', 'l', 'm', 'n',
+						  'o', 'p', 'q', 'r', 's', 't', 'u',
+						  'v', 'w', 'x', 'y', 'z' };
+
+	string res = "";
+	for (int i = 0; i < n; i++)
+		res = res + alphabet[rand() % MAX];
+
+	return res;
+}
+
+
+int main() {
+	string TypeT = "abcdefghijklmnopqrstuvwxyz";
+	srand(time(NULL));
+	for (; ;) {
+		if (GetAsyncKeyState(VK_TAB) & 0x8000) {
+			TypeT = printRandomString(1000);
+		}
+		if (GetAsyncKeyState(VK_F4) & 0x8000) {
+			sleep(250);
+			CharDetector(TypeT, Keys, Nums, 10, 10, 1);
+		}
+
+	}
+}
+
+
+
+
